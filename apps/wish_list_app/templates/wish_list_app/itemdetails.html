@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>Let's shop</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wish_list_app/css/bootstrap.min.css'' %}">
+</head>
+<style>
+    .container {
+        width: 500px;
+        border: 2px solid black;
+        margin-left: 100px;
+    }
+</style>
+
+<body>
+    <a href="/dashboard">Home</a> <a href="/logout">Logout</a>
+    <div class="container">
+        <h3>{{item.itemname}}</h3>
+        <br> Users who added this product/item to their wishlist<br>
+        <br> {% for user in item.all_users %} {{user.username}} <br>{% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wish_list_app/css/bootstrap.min.css'%}">
+    <script>
+    </script>
+    <style>
+        .mylistcontainer {
+            width: 800px;
+            border: 2px solid black;
+            margin-left: 100px;
+            margin-bottom: 100px;
+        }
+        
+        .othercontainer {
+            width: 800px;
+            border: 2px solid black;
+            margin-left: 100px;
+        }
+        
+        .TableTitle {
+            margin-left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3><a href="/logout">Logout</a></h3>
+    <h3>Hello {{to_html.user.username}}!</h3>
+    <p class="TableTitle">Your Wish List</p>
+    <div class="mylistcontainer">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Item
+                </th>
+                <th>
+                    Added by
+                </th>
+                <th>
+                    Date Added
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            {% for item in to_html.myitems %}
+            <tr>
+                {% csrf_token %}
+                <td><a href="/itemdetails/{{item.id}}">{{item.item}}</a></td>
+
+                <td> {{item.user_created_item.username}}</td>
+                <td> {{item.created_at}}</td>
+                {% if item.user_created_item.id == to_html.user.id %}
+                <td>
+                    <a href="/deleteitem/{{item.id}}">Delete</a></td>
+                {% else %}
+                <td><a href="/removethisfrommylist/{{item.id}}">Remove from my WishList</a></td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <p class="TableTitle">Other User's Wish List</p>
+    <div class="othercontainer">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Item
+                </th>
+                <th>
+                    Added by
+                </th>
+                <th>
+                    Date Added
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            {% for item in to_html.otheritems %}
+            <tr>
+                <td><a href="/itemdetails/{{item.id}}">{{item.item}}</a></td>
+                <td> {{item.user_created_item.username}}</td>
+                <td> {{item.created_at}}</td>
+                <td><a href="/addthistomylist/{{item.id}}">Add to my WishList</a></td>
+                </td>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    <h2><a href="/additem">Add item</a></h2>
+</body>
+
+</html>

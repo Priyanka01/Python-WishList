@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wish_list_app/css/bootstrap.min.css'%}">
+    <script>
+    </script>
+    <style>
+        .wrapper {
+            width: 175px;
+            display: inline-block;
+        }
+        
+        button {
+            margin-top: 20px;
+        }
+        
+        .login {
+            margin: 50px;
+            width: 175px;
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="container">
+        <h1>Welcome!!</h1>
+        <div class="wrapper">
+            <h2>Register here!</h2>
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <label for="Name">Name:</label>
+                <input type="text" name="name" placeholder="Name">
+                <br>
+                <br>
+                <label for="username">Username:</label>
+                <input type="text" name="username" placeholder="Username">
+                <br>
+                <br>
+                <label for="pwd">Password:</label>
+                <input type="password" name="pwd" placeholder="Password">
+                <br>
+                <br>
+                <label for="confirm_pwd">Confirm Password:</label>
+                <input type="password" name="confirm_pwd" placeholder="Confirm Password">
+                <br>
+                <br>
+                <label for="doh">Date Hired:</label>
+                <input type="date" name="datehired">
+                <br>
+                <button class="btn btn-primary" type="submit" name="submit" value="Register">Register</button>
+            </form>
+        </div>
+        <div class="login">
+            <h2>Login!</h2>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <label for="username">Username:</label>
+                <input type="text" name="loginusername" placeholder="Username">
+                <br>
+                <br>
+                <label for="pwd">Password:</label>
+                <input type="password" name="loginpwd" placeholder="Password">
+                <br>
+                <button class="btn btn-primary" type="submit" name="submit" value="login">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

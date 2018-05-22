@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wish_list_app/css/bootstrap.min.css'%}">
+    <script>
+    </script>
+    <style>
+        .container {
+            width: 300px;
+            margin-left: 50px;
+        }
+        
+        button {
+            margin-top: 20px;
+        }
+        
+        .atag {
+            margin-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %} {% endif %}
+    </ul>
+    <a href="/dashboard" class="atag">Home</a>
+    <a href="/logout" class="atag">Logout</a>
+    <h3 class="atag">Create a New Wish List</h3>
+    <br>
+    <div class="container">
+        <form action="/createItem" method="POST">
+            {% csrf_token %}
+            <label for="item">Item/Product:</label>
+            <input type="text" name="item">
+            <br>
+            <button class="btn btn-primary" type="submit" name="add" value="submit">Add</button>
+        </form>
+    </div>
+</body>
+
+</html>
