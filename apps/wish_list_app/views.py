@@ -3,6 +3,10 @@ from django.urls import reverse
 from .models import *
 from django.contrib import messages
 
+
+# comment for GIT test
+
+
 def index(request):
     if 'userid' in request.session:
         del request.session['userid']
